@@ -1,8 +1,10 @@
-import typer
 import platform
+import typer
 from rich.console import Console
 from rich.table import Table
+
 from app.services.git_service import check_git
+from app.services.docker_service import check_docker
 
 app = typer.Typer()
 console = Console()
@@ -17,19 +19,36 @@ def doctor():
     table.add_column("Item", style="cyan")
     table.add_column("Status", style="green")
 
-    table.add_row("Operating System", f"{platform.system()} {platform.release()}")
-    table.add_row("Python Version", platform.python_version())
+    # Operating System
+    table.add_row(
+        "Operating System",
+        f"{platform.system()} {platform.release()}"
+    )
 
+    # Python Version
+    table.add_row(
+        "Python Version",
+        platform.python_version()
+    )
+
+    # Git
+    git_installed, git_version = check_git()
+
+    if git_installed:
+        table.add_row("Git", git_version)
+    else:
+        table.add_row("Git", "Not Installed")
+
+    # Docker
+    docker_installed, docker_version = check_docker()
+
+    if docker_installed:
+        table.add_row("Docker", docker_version)
+    else:
+        table.add_row("Docker", docker_version)
 
     console.print(table)
     console.print("\n[bold green]DevPilot is running successfully![/bold green]")
-
-    installed, version = check_git()
-
-if installed:
-    table.add_row("Git", version)
-else:
-    table.add_row("Git", "Not Installed")
 
 
 if __name__ == "__main__":
