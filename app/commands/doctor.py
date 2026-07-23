@@ -42,9 +42,15 @@ def doctor():
 
     docker_installed, docker_version = check_docker()
 
+    if docker_installed:
     table.add_row(
         "Docker",
-        docker_version
+        f"✓ {docker_version}"
+    )
+else:
+    table.add_row(
+        "Docker",
+        "✗ Docker not installed"
     )
 
     console.print(table)
