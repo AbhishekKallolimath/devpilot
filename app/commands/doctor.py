@@ -63,4 +63,41 @@ def doctor():
             "✗ Docker not installed"
         )
 
+    # Print the system information table
     console.print(table)
+
+    # Calculate System Health Score
+    score = 50  # OS + Python
+
+    if git_installed:
+        score += 25
+
+    if docker_installed:
+        score += 25
+
+    # Display Score
+    console.print(f"\n[bold cyan]System Health:[/bold cyan] {score}/100")
+
+    if score == 100:
+        console.print("[bold green]Excellent! Your development environment is fully configured.[/bold green]")
+    elif score >= 75:
+        console.print("[bold yellow]Good! Only a few improvements are needed.[/bold yellow]")
+    else:
+        console.print("[bold red]Your development environment needs attention.[/bold red]")
+
+    # Recommendations
+    console.print("\n[bold yellow]Recommendations[/bold yellow]")
+
+    recommendations = []
+
+    if not git_installed:
+        recommendations.append("Install Git.")
+
+    if not docker_installed:
+        recommendations.append("Install Docker Desktop.")
+
+    if not recommendations:
+        recommendations.append("Your development environment looks great!")
+
+    for recommendation in recommendations:
+        console.print(f"• {recommendation}")
