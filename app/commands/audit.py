@@ -2,6 +2,10 @@ import typer
 
 from rich.console import Console
 from rich.table import Table
+from app.services.audit_service import (
+    check_project_files,
+    is_git_repository
+)
 
 from app.services.audit_service import check_project_files
 
@@ -23,6 +27,13 @@ def audit():
     table.add_column("Status", style="green")
 
     score = 0
+
+    console.print("\n[bold cyan]Version Control[/bold cyan]")
+
+if is_git_repository():
+    console.print("✅ Git repository detected")
+else:
+    console.print("❌ Not a Git repository")
 
     for file, exists in results.items():
 
