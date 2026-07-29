@@ -1,26 +1,28 @@
 from pathlib import Path
 
 
-IMPORTANT_FILES = [
-    "README.md",
-    ".gitignore",
-    "requirements.txt",
-    "LICENSE",
-    "Dockerfile",
-    "docker-compose.yml",
-]
+
+IMPORTANT_ITEMS = {
+    "README.md": "file",
+    "LICENSE": "file",
+    ".gitignore": "file",
+    "requirements.txt": "file",
+    "Dockerfile": "file",
+    "tests": "directory",
+    ".github/workflows": "directory",
+}
 
 
 def check_project_files():
-    """
-    Check whether important project files exist.
-    """
-
     root = Path.cwd()
-
     results = {}
 
-    for file in IMPORTANT_FILES:
-        results[file] = (root / file).exists()
+    for item, item_type in IMPORTANT_ITEMS.items():
+        path = root / item
+
+        if item_type == "file":
+            results[item] = path.is_file()
+        else:
+            results[item] = path.is_dir()
 
     return results
