@@ -26,3 +26,11 @@ def check_project_files():
             results[item] = path.is_dir()
 
     return results
+
+
+
+def is_git_repository():
+    """
+    Check if the current directory is a Git repository.
+    """
+    return (Path.cwd() / ".git").exists()
