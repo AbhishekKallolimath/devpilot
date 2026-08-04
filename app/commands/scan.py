@@ -27,3 +27,11 @@ def scan():
     table.add_row("Secrets Found", str(result["secrets_found"]))
 
     console.print(table)
+
+    if result["env_files"]:
+      console.print("\n[bold red]Potential Secrets[/bold red]")
+
+    for file in result["env_files"]:
+        console.print(f"⚠ Found .env file: {file}")
+    else:
+      console.print("\n[bold green]No .env files found.[/bold green]")
