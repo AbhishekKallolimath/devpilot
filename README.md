@@ -1,47 +1,39 @@
-# 🚀 DevPilot
+# DevPilot
 
-DevPilot is an open-source command-line tool designed to simplify everyday development and DevOps tasks.
+DevPilot is a Python-based CLI tool that helps developers audit projects, verify development environments, and detect potential security issues.
 
-The goal of DevPilot is to provide developers with a single CLI that can inspect, automate, and manage their development environment.
-
----
-
-## ✨ Vision
-
-Instead of remembering dozens of commands for Git, Docker, Kubernetes, and system diagnostics, developers can use a single tool:
-
-```bash
-devpilot doctor
-devpilot docker clean
-devpilot git status
-devpilot project create
-```
-
----
-
-## 🎯 Objectives
-
-- Improve developer productivity
-- Automate repetitive tasks
-- Simplify Docker workflows
-- Provide system health diagnostics
-- Generate project templates
-- Integrate with cloud platforms
-
----
-
-## 🛠️ Planned Features
+## Features
 
 - System Doctor
-- Docker Utilities
-- Git Utilities
-- Project Generator
-- Monitoring Dashboard
-- Kubernetes Support
-- Cloud Integrations
+- Project Audit
+- Secret Scanner
+- Project Health Score
 
----
+## Installation
 
-## 📌 Project Status
+```bash
+pip install -r requirements.txt
+```
 
-🚧 Under Active Development
+## Usage
+
+```bash
+python -m app.main doctor
+python -m app.main audit
+python -m app.main scan
+```
+
+## Roadmap
+
+- Secret detection with regex
+- HTML reports
+- JSON exports
+- Docker analysis
+- GitHub Actions analysis
+
+## Tech Stack
+
+- Python
+- Typer
+- Rich
+- Git
