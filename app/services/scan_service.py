@@ -12,3 +12,9 @@ def scan_project():
         "secrets_found": len(env_files),
         "env_files": env_files,
     }
+    PATTERNS = {
+    "API_KEY": r"API_KEY\s*=",
+    "PASSWORD": r"PASSWORD\s*=",
+    "SECRET_KEY": r"SECRET_KEY\s*=",
+    "TOKEN": r"TOKEN\s*=",
+    }
