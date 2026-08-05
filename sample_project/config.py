@@ -1,4 +1,4 @@
-API_KEY = "123456"
+API_KEY="abcdef123456"
 
 username = "admin"
 
