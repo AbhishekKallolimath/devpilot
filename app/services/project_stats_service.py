@@ -42,3 +42,18 @@ def count_total_files():
     ]
 
     return len(total_files)
+    from pathlib import Path
+
+def count_directories():
+    """
+    Count all directories in the current project.
+    """
+    project_root = Path.cwd()
+
+    directories = [
+        folder
+        for folder in project_root.rglob("*")
+        if folder.is_dir()
+    ]
+
+    return len(directories)
