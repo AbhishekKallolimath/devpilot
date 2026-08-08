@@ -57,3 +57,20 @@ def count_directories():
     ]
 
     return len(directories)
+    def count_lines_of_code():
+    """
+    Count the total number of lines in Python files.
+    """
+    project_root = Path.cwd()
+    total_lines = 0
+
+    python_files = project_root.rglob("*.py")
+
+    for file in python_files:
+        try:
+            with file.open("r", encoding="utf-8") as f:
+                total_lines += sum(1 for _ in f)
+        except (UnicodeDecodeError, PermissionError):
+            continue
+
+    return total_lines
