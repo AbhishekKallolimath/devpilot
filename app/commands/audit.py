@@ -2,12 +2,12 @@ import typer
 
 from rich.console import Console
 from rich.table import Table
+
 from app.services.audit_service import (
     check_project_files,
-    is_git_repository
+    is_git_repository,
 )
 
-from app.services.audit_service import check_project_files
 
 audit_app = typer.Typer()
 console = Console()
@@ -30,10 +30,10 @@ def audit():
 
     console.print("\n[bold cyan]Version Control[/bold cyan]")
 
-if is_git_repository():
-    console.print("✅ Git repository detected")
-else:
-    console.print("❌ Not a Git repository")
+    if is_git_repository():
+        console.print("✅ Git repository detected")
+    else:
+        console.print("❌ Not a Git repository")
 
     for file, exists in results.items():
 
@@ -47,6 +47,11 @@ else:
 
     console.print(table)
 
-    percentage = int((score / len(results)) * 100)
+    if results:
+        percentage = int((score / len(results)) * 100)
+    else:
+        percentage = 0
 
-    console.print(f"\n[bold cyan]Project Health:[/bold cyan] {percentage}/100")
+    console.print(
+        f"\n[bold cyan]Project Health:[/bold cyan] {percentage}/100"
+    )

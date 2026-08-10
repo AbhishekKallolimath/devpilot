@@ -10,6 +10,8 @@ def count_python_files():
     python_files = list(project_root.rglob("*.py"))
 
     return len(python_files)
+
+
 def count_markdown_files():
     """
     Count all Markdown (.md) files in the current project.
@@ -19,6 +21,8 @@ def count_markdown_files():
     markdown_files = list(project_root.rglob("*.md"))
 
     return len(markdown_files)
+
+
 def count_json_files():
     """
     Count all JSON (.json) files in the current project.
@@ -28,6 +32,7 @@ def count_json_files():
     json_files = list(project_root.rglob("*.json"))
 
     return len(json_files)
+
 
 def count_total_files():
     """
@@ -42,7 +47,7 @@ def count_total_files():
     ]
 
     return len(total_files)
-    from pathlib import Path
+
 
 def count_directories():
     """
@@ -57,7 +62,9 @@ def count_directories():
     ]
 
     return len(directories)
-    def count_lines_of_code():
+
+
+def count_lines_of_code():
     """
     Count the total number of lines in Python files.
     """
