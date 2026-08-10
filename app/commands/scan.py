@@ -5,6 +5,7 @@ from rich.table import Table
 
 from app.services.scan_service import scan_project
 
+
 scan_app = typer.Typer()
 console = Console()
 
@@ -29,9 +30,9 @@ def scan():
     console.print(table)
 
     if result["env_files"]:
-      console.print("\n[bold red]Potential Secrets[/bold red]")
+        console.print("\n[bold red]Potential Secrets[/bold red]")
 
-    for file in result["env_files"]:
-        console.print(f"⚠ Found .env file: {file}")
+        for file in result["env_files"]:
+            console.print(f"⚠ Found .env file: {file}")
     else:
-      console.print("\n[bold green]No .env files found.[/bold green]")
+        console.print("\n[bold green]No .env files found.[/bold green]")
