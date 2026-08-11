@@ -1,79 +1,76 @@
 from pathlib import Path
 
 
-def count_python_files():
-    """
-    Count all Python (.py) files in the current project.
-    """
+EXCLUDED_DIRS = {
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "node_modules",
+}
+
+
+def get_project_files():
+    """Return project files excluding unnecessary directories."""
     project_root = Path.cwd()
 
-    python_files = list(project_root.rglob("*.py"))
-
-    return len(python_files)
-
-
-def count_markdown_files():
-    """
-    Count all Markdown (.md) files in the current project.
-    """
-    project_root = Path.cwd()
-
-    markdown_files = list(project_root.rglob("*.md"))
-
-    return len(markdown_files)
-
-
-def count_json_files():
-    """
-    Count all JSON (.json) files in the current project.
-    """
-    project_root = Path.cwd()
-
-    json_files = list(project_root.rglob("*.json"))
-
-    return len(json_files)
-
-
-def count_total_files():
-    """
-    Count all files in the current project.
-    """
-    project_root = Path.cwd()
-
-    total_files = [
+    return [
         file
         for file in project_root.rglob("*")
         if file.is_file()
+        and not any(part in EXCLUDED_DIRS for part in file.parts)
     ]
 
-    return len(total_files)
+
+def count_python_files():
+    """Count Python files in the project."""
+    return sum(
+        1 for file in get_project_files()
+        if file.suffix == ".py"
+    )
+
+
+def count_markdown_files():
+    """Count Markdown files in the project."""
+    return sum(
+        1 for file in get_project_files()
+        if file.suffix == ".md"
+    )
+
+
+def count_json_files():
+    """Count JSON files in the project."""
+    return sum(
+        1 for file in get_project_files()
+        if file.suffix == ".json"
+    )
+
+
+def count_total_files():
+    """Count all project files."""
+    return len(get_project_files())
 
 
 def count_directories():
-    """
-    Count all directories in the current project.
-    """
+    """Count project directories excluding unnecessary directories."""
     project_root = Path.cwd()
 
-    directories = [
-        folder
+    return sum(
+        1
         for folder in project_root.rglob("*")
         if folder.is_dir()
-    ]
-
-    return len(directories)
+        and not any(part in EXCLUDED_DIRS for part in folder.parts)
+    )
 
 
 def count_lines_of_code():
-    """
-    Count the total number of lines in Python files.
-    """
-    project_root = Path.cwd()
+    """Count lines of code in Python files."""
     total_lines = 0
 
-    python_files = project_root.rglob("*.py")
+    for file in get_project_files():
+        if file.suffix != ".py":
+            continue
 
-    for file in python_files:
         try:
             with file.open("r", encoding="utf-8") as f:
                 total_lines += sum(1 for _ in f)

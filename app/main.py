@@ -3,12 +3,14 @@ import typer
 from app.commands.doctor import doctor_app
 from app.commands.audit import audit_app
 from app.commands.scan import scan_app
+from app.commands.stats import stats_app
 
 app = typer.Typer()
 
 app.add_typer(doctor_app, name="doctor")
 app.add_typer(audit_app, name="audit")
 app.add_typer(scan_app, name="scan")
+app.add_typer(stats_app, name="stats")
 
 
 if __name__ == "__main__":
