@@ -35,3 +35,9 @@ def stats():
     table.add_row("Lines of Code", str(count_lines_of_code()))
 
     console.print(table)
+    console.print(
+    f"\n[bold cyan]Project Summary:[/bold cyan] "
+    f"{count_python_files()} Python files, "
+    f"{count_lines_of_code()} lines of code."
+)
+
