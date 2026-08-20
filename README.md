@@ -14,7 +14,6 @@ DevPilot is a Python-based CLI tool that helps developers audit projects, verify
 ```bash
 pip install -r requirements.txt
 ```
-
 ## Usage
 
 ```bash
@@ -37,3 +36,13 @@ python -m app.main scan
 - Typer
 - Rich
 - Git
+
+
+
+
+
+
+
+
+----
+---
