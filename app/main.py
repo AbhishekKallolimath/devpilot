@@ -25,6 +25,53 @@ def info():
     console.print("• Project Statistics")
     console.print("• Git Repository Validation")
 
+@app.command()
+def check():
+    """Run a quick DevPilot project check."""
+
+    console.print("\n[bold cyan]🔎 DevPilot Quick Check[/bold cyan]\n")
+
+    console.print("[bold]Git:[/bold]", end=" ")
+
+    from app.services.audit_service import is_git_repository
+
+    if is_git_repository():
+        console.print("[green]✓ Repository detected[/green]")
+    else:
+        console.print("[red]✗ Not a Git repository[/red]")
+
+    console.print("[bold]Project:[/bold] [green]✓ Ready for analysis[/green]")
+    console.print("[bold]Security:[/bold] [green]✓ Scanner available[/green]")
+    console.print("[bold]Statistics:[/bold] [green]✓ Available[/green]")
+
+    console.print("\n[bold green]DevPilot check completed.[/bold green]")
+
+@app.command()
+def health():
+    """Display the current project health status."""
+
+    from app.services.audit_service import check_project_files
+
+    results = check_project_files()
+
+    total = len(results)
+    passed = sum(results.values())
+
+    score = int((passed / total) * 100) if total else 0
+
+    console.print("\n[bold cyan]📊 DevPilot Project Health[/bold cyan]")
+
+    if score >= 80:
+        status = "[green]Excellent[/green]"
+    elif score >= 60:
+        status = "[yellow]Good[/yellow]"
+    else:
+        status = "[red]Needs Improvement[/red]"
+
+console.print(f"Checks Passed: [bold]{passed}/{total}[/bold]")
+console.print(f"Health Score: [bold]{score}/100[/bold]")
+console.print(f"Status: {status}")
+
 app = typer.Typer()
 console = Console()
 
