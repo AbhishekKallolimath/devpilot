@@ -5,7 +5,9 @@ from app.services.project_stats_service import (
     count_total_files,
 )
 
-print("Python Files :", count_python_files())
-print("Markdown Files :", count_markdown_files())
-print("JSON Files :", count_json_files())
-print("Total Files :", count_total_files())
+
+def test_project_statistics():
+    assert count_python_files() >= 1
+    assert count_markdown_files() >= 1
+    assert count_json_files() >= 0
+    assert count_total_files() >= 1

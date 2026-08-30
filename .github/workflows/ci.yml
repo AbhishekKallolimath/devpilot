@@ -22,3 +22,6 @@ jobs:
 
       - name: Run DevPilot health check
         run: python -m app.main health
+
+      - name: Run tests
+        run: pytest
