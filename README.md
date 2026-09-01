@@ -37,7 +37,26 @@ python -m app.main scan
 - Rich
 - Git
 
+## Current Features
 
+- ✅ System health checks
+- ✅ Git repository validation
+- ✅ Project structure auditing
+- ✅ Secret and `.env` file scanning
+- ✅ Project statistics
+- ✅ Project health scoring
+- ✅ Automated tests with Pytest
+- ✅ GitHub Actions CI
+
+## CLI Commands
+
+```bash
+python -m app.main doctor
+python -m app.main audit
+python -m app.main scan
+python -m app.main stats
+python -m app.main health
+python -m app.main version
 
 
 
