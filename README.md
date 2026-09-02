@@ -59,9 +59,5 @@ python -m app.main health
 python -m app.main version
 
 
-
-
-
-
 ----
 ---
