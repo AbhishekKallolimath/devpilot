@@ -138,6 +138,5 @@ def health():
     else:
         console.print("\n[bold green]All project checks passed![/bold green]")
 
-
 if __name__ == "__main__":
     app()
