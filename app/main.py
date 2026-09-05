@@ -13,6 +13,11 @@ VERSION = "0.1.0"
 app = typer.Typer()
 console = Console()
 
+
+# -----------------------------
+# Information
+# -----------------------------
+
 @app.command()
 def info():
     """Display information about DevPilot."""
@@ -27,6 +32,11 @@ def info():
     console.print("• Secret Scanning")
     console.print("• Project Statistics")
     console.print("• Git Repository Validation")
+
+
+# -----------------------------
+# Quick Check
+# -----------------------------
 
 @app.command()
 def check():
@@ -49,6 +59,11 @@ def check():
 
     console.print("\n[bold green]DevPilot check completed.[/bold green]")
 
+
+# -----------------------------
+# Project Health
+# -----------------------------
+
 @app.command()
 def health():
     """Display the current project health status."""
@@ -76,7 +91,8 @@ def health():
     console.print(f"Status: {status}")
 
     failed_checks = [
-        name for name, passed_check in results.items()
+        name
+        for name, passed_check in results.items()
         if not passed_check
     ]
 
@@ -87,8 +103,11 @@ def health():
             console.print(f"• {check}")
     else:
         console.print("\n[bold green]All project checks passed![/bold green]")
-app = typer.Typer()
-console = Console()
+
+
+# -----------------------------
+# Subcommands
+# -----------------------------
 
 app.add_typer(doctor_app, name="doctor")
 app.add_typer(audit_app, name="audit")
@@ -96,47 +115,20 @@ app.add_typer(scan_app, name="scan")
 app.add_typer(stats_app, name="stats")
 
 
+# -----------------------------
+# Version
+# -----------------------------
+
 @app.command()
 def version():
     """Show the DevPilot version."""
+
     print(f"DevPilot v{VERSION}")
 
-@app.command()
-def health():
-    """Display the current project health status."""
 
-    from app.services.audit_service import check_project_files
-
-    results = check_project_files()
-
-    total = len(results)
-    passed = sum(results.values())
-    score = int((passed / total) * 100) if total else 0
-
-    console.print("\n[bold cyan]📊 DevPilot Project Health[/bold cyan]")
-
-    if score >= 80:
-        status = "[green]Excellent[/green]"
-    elif score >= 60:
-        status = "[yellow]Good[/yellow]"
-    else:
-        status = "[red]Needs Improvement[/red]"
-
-    console.print(f"Checks Passed: [bold]{passed}/{total}[/bold]")
-    console.print(f"Health Score: [bold]{score}/100[/bold]")
-    console.print(f"Status: {status}")
-
-    failed_checks = [
-        name for name, passed_check in results.items()
-        if not passed_check
-    ]
-
-    if failed_checks:
-        console.print("\n[bold red]Missing Checks[/bold red]")
-        for check in failed_checks:
-            console.print(f"• {check}")
-    else:
-        console.print("\n[bold green]All project checks passed![/bold green]")
+# -----------------------------
+# Entry Point
+# -----------------------------
 
 if __name__ == "__main__":
     app()
