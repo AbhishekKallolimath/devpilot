@@ -80,14 +80,18 @@ def scan_project():
             continue
 
         # Only scan relevant text/code files
-        if file.suffix.lower() not in SCANNABLE_EXTENSIONS:
+        # Detect .env files before extension filtering
+        if file.name == ".env":
+            env_files.append(file)
+
+        # Only scan relevant text/code files
+        if (
+            file.name != ".env"
+            and file.suffix.lower() not in SCANNABLE_EXTENSIONS
+        ):
             continue
 
         files_scanned += 1
-
-        # Detect .env files
-        if file.name == ".env":
-            env_files.append(file)
 
         try:
             content = file.read_text(
