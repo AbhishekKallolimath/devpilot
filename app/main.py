@@ -13,6 +13,18 @@ VERSION = "0.1.0"
 app = typer.Typer()
 console = Console()
 
+@app.callback()
+def main(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        help="Show the DevPilot version and exit.",
+        is_eager=True,
+    ),
+):
+    if version:
+        print(f"DevPilot v{VERSION}")
+        raise typer.Exit()
 
 # -----------------------------
 # Information
@@ -122,7 +134,6 @@ app.add_typer(stats_app, name="stats")
 @app.command()
 def version():
     """Show the DevPilot version."""
-
     print(f"DevPilot v{VERSION}")
 
 
